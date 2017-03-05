@@ -138,66 +138,7 @@ public class BitmapUtils {
 		return BitmapUtils.getCircleBitmap(bitmap);
 	}
 
-    
-//    static RenderScript mRS = null;
-//    static ScriptIntrinsicYuvToRGB mYuvToRgb = null;
-//    static Allocation ain = null;
-//    static Allocation aOut = null;
-//    static final String TIMING_LOG_TAG = "CvUtils timing";
-//	@SuppressLint("NewApi")
-//	public static Bitmap yuvToBitmapRs(Context context,byte []nv21, int width, int height, int yuvType,Bitmap buffer) {
-//		TimingLogger timings = new TimingLogger(TIMING_LOG_TAG, "NV21ToRGBABitmap");
-//		if(buffer != null && (buffer.getWidth() != width || buffer.getHeight() != height)){
-//			throw new RuntimeException("yuvToBitmap buffer is illgel !");
-//		}
-//		if(buffer == null){
-//			buffer = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-//		}
-//		try {
-//			Class.forName("android.renderscript.Element$DataKind").getField("PIXEL_YUV");
-//			Class.forName("android.renderscript.ScriptIntrinsicYuvToRGB");
-//	    	byte[] imageData = nv21;
-//	    	if (mRS == null ||(aOut.getType().getX() != width || aOut.getType().getY() != height)) {
-//	    		mRS = RenderScript.create(context);
-//	    		mYuvToRgb = ScriptIntrinsicYuvToRGB.create(mRS, Element.U8_4(mRS));
-//	    		Type.Builder tb = new Type.Builder(mRS, Element.createPixel(mRS, Element.DataType.UNSIGNED_8, Element.DataKind.PIXEL_YUV));
-//	    		tb.setX(width);
-//	    		tb.setY(height);
-//	    		tb.setMipmaps(false);
-//	    		tb.setYuvFormat(yuvType);
-//	    		ain = Allocation.createTyped(mRS, tb.create(), Allocation.USAGE_SCRIPT);
-//	    		timings.addSplit("Prepare for ain");
-//	    		Type.Builder tb2 = new Type.Builder(mRS, Element.RGBA_8888(mRS));
-//	    		tb2.setX(width);
-//	    		tb2.setY(height);
-//	    		tb2.setMipmaps(false);
-//	    		aOut = Allocation.createTyped(mRS, tb2.create(), Allocation.USAGE_SCRIPT & Allocation.USAGE_SHARED);
-//	    		timings.addSplit("Prepare for aOut");
-//	    		timings.addSplit("Create Bitmap");
-//			}
-//	    	ain.copyFrom(imageData);
-//			timings.addSplit("ain copyFrom");
-//			mYuvToRgb.setInput(ain);
-//			timings.addSplit("setInput ain");
-//			mYuvToRgb.forEach(aOut);
-//			timings.addSplit("NV21 to ARGB forEach");
-//			aOut.copyTo(buffer);
-//			timings.addSplit("Allocation to Bitmap");
-//		} catch (Exception e) {
-//			return yuvToBitmap(nv21,width,height,yuvType);
-//		}
-//		
-//    	timings.dumpToLog();
-//    	return buffer;
-//	}
-//
-//    public static Bitmap nv21ToBitmapRs(Context context,byte []nv21, int width, int height,Bitmap buffer){
-//    	return yuvToBitmapRs(context,nv21,width,height,ImageFormat.NV21,buffer);
-//    }
-//    public static Bitmap nv21ToBitmapRs(Context context,byte []nv21, int width, int height){
-//    	return nv21ToBitmapRs(context,nv21,width,height,null);
-//    }
-	public static Bitmap yuvToBitmap(byte[]nv21 ,int width, int height, int yuvType) {
+ 	public static Bitmap yuvToBitmap(byte[]nv21 ,int width, int height, int yuvType) {
 		YuvImage yuvImage = new YuvImage(nv21, yuvType, width, height, null);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
         yuvImage.compressToJpeg(new Rect(0, 0, width, height), 100, baos);
